@@ -10,36 +10,35 @@ from ..items import BbcScrapeDataEngineerItem
 
 class BBC_spider(scrapy.Spider):
     name = 'BBC'
-    start_urls = ['https://www.bbc.com/']
+    start_urls = ['https://www.bbc.co.uk/search?q=corona']
      
     def parse(self, response):
         items = BbcScrapeDataEngineerItem() #Temporary container
-        all_news_containers = response.css('.media__content')
-        
+        all_news_containers = response.css('.ett16tt11')
+
         for news in all_news_containers:
-#            print(news)
             try:
-                #Headlines
-                headings = news.css('.media__link::text').extract_first()
-                headings = headings.strip()
-#                yield {'titletext':headings}
-                items['Headline'] = headings
-                
-                #HyperLinks
-                link = news.css('a').xpath("@href").extract_first()
-                link = link.strip()
-#                yield {'titletext':headings}
-                items['HyperLinks'] = link
-#                print(link)
-                
-                #TAG
-                tag = news.css('.tag::text').extract_first()
-                tag = tag.strip()
-#                yield {'titletext':headings}
-                items['Tag'] = tag
-                
-                
-                yield items
-            except AttributeError: #eleminating the Nonetype attribute
+                print(news)
+                keywords = news.css('.ecn1o5v0 span::text').extract()
+
+                if keywords[1] == 'Programmes':
+                    
+                    #Date & Tag
+                    items['Date'] = keywords[0]
+                    items['Tag'] = keywords[2]
+                    yield {'title': keywords[0]}
+                    yield {'title': keywords[2]}
+                    
+                    #Headlines
+                    headings = news.css('.ett16tt7 span::text').extract_first()
+                    items['Headline'] = headings
+                    yield {'title': headings}
+                    
+                    #HyperLinks
+                    link = news.css('.ett16tt4 a::attr(href)').get()
+                    items['HyperLinks'] = link
+                    yield {'title': link}
+                    
+            except IndexError: #omits first two or three classes as they are not relevent
                 continue
         

@@ -12,6 +12,7 @@ class BbcScrapeDataEngineerItem(scrapy.Item):
     #Extracted Data -> Temporary Container
     # define the fields for your item here like:
     # name = scrapy.Field()
+    Date = scrapy.Field()
     Headline = scrapy.Field()
     HyperLinks = scrapy.Field()
     Tag = scrapy.Field()
