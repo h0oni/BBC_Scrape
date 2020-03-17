@@ -14,5 +14,8 @@ class BbcScrapeDataEngineerItem(scrapy.Item):
     # name = scrapy.Field()
     Date = scrapy.Field()
     Headline = scrapy.Field()
+    Type = scrapy.Field()
     HyperLinks = scrapy.Field()
     Tag = scrapy.Field()
+    Text = scrapy.Field()
+    
