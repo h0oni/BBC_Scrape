@@ -7,6 +7,7 @@ Created on Sat Mar 14 22:56:25 2020
 
 import scrapy
 from ..items import BbcScrapeDataEngineerItem
+from datetime import datetime
 
 class BBC_spider(scrapy.Spider):
     name = 'BBC'
@@ -26,7 +27,8 @@ class BBC_spider(scrapy.Spider):
                 if keywords[1] == 'News' or 'Programmes':
                     
                     #Date & Tag
-                    items['Date'] = keywords[0]
+                    print(keywords[0])
+                    items['Date'] = datetime.strptime(keywords[0], '%d %b %Y').date()
                     items['Tag'] = keywords[2]
                     items['Type'] = keywords[1]
                     
