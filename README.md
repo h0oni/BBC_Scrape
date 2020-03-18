@@ -13,7 +13,7 @@ The database <b>(Postgresql)</b> is hosted on <b>[heroku.com]</b>(www.heroku.com
 
 ![](BBC_Scrape_data_engineer/Database/database_1.PNG)
 
-<h4><b>Credintials:<b><h4>
+<h4><b>Credintials:</b><h4> In <b>.txt</b> format: https://github.com/h0oni/BBC_Scrape/blob/master/BBC_Scrape_data_engineer/Database/credentials.txt
 
 ![](BBC_Scrape_data_engineer/Database/heroku.PNG)
 
@@ -24,4 +24,4 @@ then with the help of a <b>Hash table (Dictionary) <b> the hit count is generate
 <h3><b>-CSV format</b></h3>Here is the output file : https://github.com/h0oni/BBC_Scrape/blob/master/BBC_Scrape_data_engineer/Bonus_Analytics/analytics.csv
 <h3><b>-Online server</b></h3>
 
-![](BBC_Scrape_data_engineer/Database/database_1.PNG)
+![](BBC_Scrape_data_engineer/Bonus_Analytics/analytics.PNG)
