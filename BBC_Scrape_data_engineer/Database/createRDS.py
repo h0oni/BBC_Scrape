@@ -2,21 +2,25 @@
 
 import csv
 import psycopg2
+import os
 
 #Run the below code to upload the csv to database
 def load_csv(file_name,db_name):
-#    con = psycopg2.connect(
-#            host = "localhost",
-#            database = "sakib",
-#            user = "postgres",
-#            password = "Rainbow6^"
-#            )
-    con = psycopg2.connect(
-            host = "ec2-52-86-33-50.compute-1.amazonaws.com",
-            database = "dd0t9b5dh1nqt2",
-            user = "yoalzlolfjzwwt",
-            password = "9cbaa0065c8c927cb30b3c939c01710fe8a07d432b17e65e342b9f35b8976ec2"
-            )
+    #offline database
+    con = psycopg2.connect(  
+                host = "localhost",
+                database = "sakib",
+                user = os.environ.get('user_local'),
+                password = os.environ.get('pass_local')
+                )   
+        
+    #heroku database
+    #con = psycopg2.connect(
+    #            host = os.environ.get('heroku_host'),
+    #            database = os.environ.get('heroku_database'),
+    #            user = os.environ.get('heroku_user'),
+    #            password = os.environ.get('heroku_pass')
+    #            ) 
     cur = con.cursor()
     with open(file_name, 'r') as f:
         reader = csv.reader(f)
@@ -30,18 +34,21 @@ def load_csv(file_name,db_name):
 #Run the below code to create the database
 
 def create_database(db_name):
-#    conn = psycopg2.connect(
-#            host = "localhost",
-#            database = "sakib",
-#            user = "postgres",
-#            password = "Rainbow6^"
-#            )
-    con = psycopg2.connect(
-            host = "ec2-52-86-33-50.compute-1.amazonaws.com",
-            database = "dd0t9b5dh1nqt2",
-            user = "yoalzlolfjzwwt",
-            password = "9cbaa0065c8c927cb30b3c939c01710fe8a07d432b17e65e342b9f35b8976ec2"
-            )
+    #offline database
+    con = psycopg2.connect(  
+                host = "localhost",
+                database = "sakib",
+                user = os.environ.get('user_local'),
+                password = os.environ.get('pass_local')
+                )   
+        
+    #heroku database
+    #con = psycopg2.connect(
+    #            host = os.environ.get('heroku_host'),
+    #            database = os.environ.get('heroku_database'),
+    #            user = os.environ.get('heroku_user'),
+    #            password = os.environ.get('heroku_pass')
+    #            ) 
     cur = con.cursor()
     cur.execute(f"""DROP TABLE IF EXISTS {db_name}""")
     cur.execute(f"""CREATE TABLE {db_name}(

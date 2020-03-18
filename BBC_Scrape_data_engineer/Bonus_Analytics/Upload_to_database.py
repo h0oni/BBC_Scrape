@@ -6,23 +6,25 @@ Created on Wed Mar 18 22:51:21 2020
 """
 import csv
 import psycopg2
+import os
 
 #connecting with the database
 #offline database
-#con = psycopg2.connect(  
-#            host = "localhost",
-#            database = "sakib",
-#            user = "postgres",
-#            password = "Rainbow6^"
-#            )   
+con = psycopg2.connect(  
+            host = "localhost",
+            database = "sakib",
+            user = os.environ.get('user_local'),
+            password = os.environ.get('pass_local')
+            )   
     
 #heroku database
-con = psycopg2.connect(
-            host = "ec2-52-86-33-50.compute-1.amazonaws.com",
-            database = "dd0t9b5dh1nqt2",
-            user = "yoalzlolfjzwwt",
-            password = "9cbaa0065c8c927cb30b3c939c01710fe8a07d432b17e65e342b9f35b8976ec2"
-            )   
+#con = psycopg2.connect(
+#            host = os.environ.get('heroku_host'),
+#            database = os.environ.get('heroku_database'),
+#            user = os.environ.get('heroku_user'),
+#            password = os.environ.get('heroku_pass')
+#            )   
+
 cur = con.cursor()
 
 def create_database(cur,con):
@@ -44,5 +46,5 @@ def load_csv(cur,con):
             cur.execute(f"INSERT INTO analytics VALUES (%s, %s)",row)
     con.commit()
     
-create_database(cur,con)
+#create_database(cur,con)
 load_csv(cur,con)
