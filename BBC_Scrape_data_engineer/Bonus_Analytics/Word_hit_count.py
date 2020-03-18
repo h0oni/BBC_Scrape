@@ -55,7 +55,7 @@ word_list = data.split()
 fdist = FreqDist()
 for word in word_list:
     fdist[word] += 1 
-    
+
 #saving the data
 create_database()
 with open('analytics.csv', 'w') as f:
