@@ -43,6 +43,7 @@ def create_database(db_name):
             password = "9cbaa0065c8c927cb30b3c939c01710fe8a07d432b17e65e342b9f35b8976ec2"
             )
     cur = con.cursor()
+    cur.execute(f"""DROP TABLE IF EXISTS {db_name}""")
     cur.execute(f"""CREATE TABLE {db_name}(
     Date text,
     Headline text,
@@ -51,7 +52,7 @@ def create_database(db_name):
     Text text,
     Type text)""")
     con.commit()
-    print(f'Database-"{db_name}" created')
+    print(f'Table-"{db_name}" created')
    
     
 
